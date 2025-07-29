@@ -13,10 +13,10 @@ Usage:
 
   2. Run the script with the template:
      export HOSTNAME=$(hostname)
-     uvx --from jinja2-max j2 --env -i template.j2
+     uvx --from jinja-max j2 --env -i template.j2
 
   3. Or using a pipe:
-     echo "The current path is {{ env.PATH }}" | ./main.py --env
+     echo "The current path is {{ env.PATH }}" | uvx --from jinja-max j2 --env
 
 Note: Environment variable names in the template are case-sensitive.
       Use the exact case as shown in your environment (e.g., 'USER', 'HOME').
