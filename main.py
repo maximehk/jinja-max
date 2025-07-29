@@ -21,6 +21,8 @@ Usage:
 
      echo "The current path is {{ env.PATH }}" | uvx --from jinja-max j2 --env
 
+Alternatively you can just install `j2` with `uv tool install jinja2-max` and run it like so: `j2 --env -i template.j2`
+
 Note: Environment variable names in the template are case-sensitive.
       Use the exact case as shown in your environment (e.g., 'USER', 'HOME').
 """
@@ -39,6 +41,7 @@ app = typer.Typer(
     help="A simple CLI tool to render Jinja2 templates.",
     add_completion=False,
 )
+
 
 @app.command()
 def main(
@@ -71,7 +74,7 @@ def main(
             if sys.stdin.isatty():
                 typer.echo(
                     "Error: No input file provided and no data piped to stdin.",
-                    err=True
+                    err=True,
                 )
                 raise typer.Exit(code=1)
             template_content = sys.stdin.read()
@@ -83,7 +86,7 @@ def main(
         context = {}
         if use_env:
             # Expose environment variables under the 'env' key
-            context['env'] = dict(os.environ)
+            context["env"] = dict(os.environ)
 
         # --- 3. Render and Print Output ---
         rendered_output = template.render(context)
@@ -98,9 +101,9 @@ def main(
         raise typer.Exit(code=1)
 
 
-
 def main():
     app()
+
 
 if __name__ == "__main__":
     main()
